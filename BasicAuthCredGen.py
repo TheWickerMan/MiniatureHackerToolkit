@@ -46,7 +46,6 @@ def ObtainUsername():
             for line in Userfile:
                 Username.append(line.strip("\n"))
     return Username
-
 #Obtains the passwords for processing
 def ObtainPasswords():
     Password = []
@@ -63,6 +62,7 @@ def ObtainPasswords():
 
 #Generates the BasicAuth format
 def B64CredGenerator(Username, Password, Output, Suppress):
+    Counter = 0
     if Output == True:
         WriteFile = open(args.o, "a")
     for x in Username:
@@ -73,6 +73,9 @@ def B64CredGenerator(Username, Password, Output, Suppress):
                 WriteFile.write(Encoded+"\n")
             if Suppress == False:
                 print(Encoded)
+            Counter+=1
+    print(str(Counter)+" Credentials Generated.")
 
+print("---------Initialising.---------")
 B64CredGenerator(ObtainUsername(), ObtainPasswords(), Output, Suppress)
 print("-----Generation-Completed.-----")
