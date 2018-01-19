@@ -21,7 +21,7 @@ Output = True
 if args.su  == None and args.uf == None:
     print("Please Provide Valid Username(s).")
     exit()
-if args.sp  == None and args.pm == None:
+if args.sp  == None and args.pf == None:
     print("Please Provide Valid Password(s).")
     exit()
 if args.o == None:
