@@ -12,3 +12,8 @@ Generates a list of Basic Auth credentials from a list of usernames and password
 
 
 *[-Filter]* Allows the filtration of email addresses by domain from a list. (Useful for sorting through email dumps)
+
+**PwnedCheck.py**:  *Usage: [-h], [-email], [-file], [-output], [-delay]*
+
+
+Checks email addresses against HaveIBeenPwned (https://haveibeenpwned.com) using its API and retrieves information pertaining to any data breaches the email addresses feature in.
