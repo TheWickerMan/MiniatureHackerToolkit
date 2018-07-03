@@ -61,7 +61,9 @@ def SheetCreation(Results):
         Data.append(Results[x].split(":")[1])
 
     if ArgumentValues.Output != None:
+        print("Writing to file.")
         FileWrite("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
+        print("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
     else:
         print("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
 
