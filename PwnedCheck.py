@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description="----------PwnedCheck-Help-Page----
 parser.add_argument("-email", help="Specify a single email to check. \n")
 parser.add_argument("-file", help="Specify a file containing a list of emails to check. \n")
 parser.add_argument("-output", help="Output content to file. \n")
-parser.add_argument("-delay", help="Sets the time delay - by default it is 5 seconds between requests. \n", type=int)
+parser.add_argument("-delay", help="Sets the time delay - by default it is 2 seconds between requests. \n", type=int)
 
 args = parser.parse_args()
 class ArgumentValues():
@@ -26,7 +26,7 @@ def BreachedAccount(Email):
     APICall = requests.get("https://haveibeenpwned.com/api/v2/breachedaccount/{}".format(Email), "User-Agent: PwnedCheck.py - Cmdline Checker")
     if str(APICall) == "<Response [503]>":
         print("ERROR: Site is currently under load.  Please try again at a later time.")
-        Exit()
+        return False
     if str(APICall) != "<Response [200]>":
         return False
     APICall = json.loads(APICall.text)
@@ -53,32 +53,34 @@ def PasteAccount(Email):
 def SheetCreation(Results):
     Columns = ["Email"]
     Data = [ArgumentValues.Email]
-    TotalBreaches = "Total Breaches:      {}".format(len(Results))
     for x in range(0, len(Results)):
         Columns.append("Breach")
         Columns.append("Date")
-        Data.append(Results[x].split(":")[0].strip("/'[]"))
-        Data.append(Results[x].split(":")[1])
+        Data.append(str(Results[x].split(":")[0].strip("/'[]")))
+        Data.append(str(Results[x].split(":")[1]))
+    Columns.append("Total Breaches")
+    Data.append(str(len(Results)))
 
     if ArgumentValues.Output != None:
         print("Writing to file.")
-        FileWrite("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
-        print("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
+        print("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
+        FileWrite("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
     else:
-        print("\n{}\n{}\n{}".format(",".join(Columns), ",".join(Data), TotalBreaches))
+        print("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
 
 #Module to append data to a file
 def FileWrite(Data):
     with open("{}.csv".format(ArgumentValues.Output), "a") as Outfile:
         Outfile.write(Data)
 
-if args.email == None and args.file == None:
+if args.email == False and args.file == False:
     print("No Email Arguments Provided.")
-    Exit()
+    exit()
 
 #To prevent stress on the site, a minimum of 5 seconds delay is enforced.
-if args.delay > 5:
-    ArgumentValues.Delay = args.delay
+if args.delay:
+    if args.delay > 2:
+        ArgumentValues.Delay = args.delay
 
 #Runs the email against both of the API calls
 if ArgumentValues.Email:
@@ -94,11 +96,14 @@ if ArgumentValues.File:
             Lines = list(filter(None, ReadFile.read().splitlines()))
     except IOError:
         print("ERROR: Issues reading file.  Please ensure that the file locations and permissions are valid.")
+        exit()
     for Email in Lines:
+        ArgumentValues.Email = Email
         Breached = BreachedAccount(Email)
         if Breached != False:
             BreachedAccountCounter +=1
         PasteAccount(Email)
         if PasteAccount != False:
             PastebinAccountCounter+=1
-    print("Number of accounts featured in breaches: {}\nNumber of accounts featured in Pastebin posts:{}".format(BreachedAccountCounter, PastebinAccountCounter))
+    FileWrite("\nNumber of accounts featured in breaches: {}\nNumber of accounts featured in Pastebin posts:{}".format(BreachedAccountCounter, PastebinAccountCounter))
+    print("\nNumber of accounts featured in breaches: {}\nNumber of accounts featured in Pastebin posts:{}".format(BreachedAccountCounter, PastebinAccountCounter))
