@@ -17,7 +17,7 @@ class ArgumentValues():
     Email = args.email
     File = args.file
     Output = args.output
-    Delay = 5
+    Delay = 2
 
 #Grabs data on previous credential dumps using the haveibeenpwned API
 def BreachedAccount(Email):
