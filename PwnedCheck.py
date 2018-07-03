@@ -64,7 +64,7 @@ def SheetCreation(Results):
     if ArgumentValues.Output != None:
         print("Writing to file.")
         print("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
-        FileWrite("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
+        FileWrite("\n{}\n{}\n".format(str(",".join(Columns)), str(",".join(Data))))
     else:
         print("\n{}\n{}".format(str(",".join(Columns)), str(",".join(Data))))
 
