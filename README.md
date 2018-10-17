@@ -17,3 +17,8 @@ Generates a list of Basic Auth credentials from a list of usernames and password
 
 
 Checks email addresses against HaveIBeenPwned (https://haveibeenpwned.com) using its API and retrieves information pertaining to any data breaches the email addresses feature in.
+
+**Web-POC**
+
+Contains various concepts for web-based attacks.
+ - CORS.html - Tests for misconfigured Cross-Origin Resource Sharing functionality.
