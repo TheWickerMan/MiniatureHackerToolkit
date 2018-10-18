@@ -18,6 +18,10 @@ Generates a list of Basic Auth credentials from a list of usernames and password
 
 Checks email addresses against HaveIBeenPwned (https://haveibeenpwned.com) using its API and retrieves information pertaining to any data breaches the email addresses feature in.
 
+**Iterator.py**:  *Usage: [-i], [-n]*
+
+Iteratively generates a list up upper/lower string combinations from a provided list.  Useful for stuff, EG: File extensions for file upload validation, etc.
+
 **Web-POC**
 
 Contains various concepts for web-based attacks.
