@@ -55,23 +55,33 @@ class Main():
         for Site in Main.Domains:
             WebRequest = (Main.SiteConnect(Site))
             if WebRequest == "False":
-                break
-            #Iterates through the different header titles
-            for HeaderTitle in Main.SecurityHeaders:
-                if Site not in Main.BooleanHeaders:
-                    Main.BooleanHeaders[Site] = {}
-                Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[False]
-                for Header in Main.SecurityHeaders[HeaderTitle]:
-                    if Header in WebRequest:
-                        #Checks the header values against approved ones
-                        if re.search(Main.SecurityHeaders[HeaderTitle][Header], WebRequest[Header]):
-                            Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[True]
+                pass
+            else:
+                #Iterates through the different header titles
+                for HeaderTitle in Main.SecurityHeaders:
+                    if Site not in Main.BooleanHeaders:
+                        Main.BooleanHeaders[Site] = {}
+                    Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[False]
+                    for Header in Main.SecurityHeaders[HeaderTitle]:
+                        if Header in WebRequest:
+                            #Checks the header values against approved ones
+                            if re.search(Main.SecurityHeaders[HeaderTitle][Header], WebRequest[Header]):
+                                Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[True]
 
     def WriteOutput():
         with open(Main.BasicInformation["OutputFile"], "a") as CSVOutput:
             Writer = csv.writer(CSVOutput, delimiter=",")
-            #Writes table headers
-            FormatSecHeader = [""] + Main.SecurityHeadersOrder
+            FormatSecHeader = [""]
+            Key = ""
+            #Creates index for the CSV columns
+            for Num in range(0, len(Main.SecurityHeadersOrder)):
+                #Writes table headers
+                FormatSecHeader.append("{}".format(int(Num)))
+
+            #Creates key for the index
+            for Value in FormatSecHeader[1:]:
+                Key = Key + "[{}] - {}\n".format(Value, Main.SecurityHeadersOrder[int(Value)])
+            CSVOutput.write(Key)
             Writer.writerow(FormatSecHeader)
 
             #Outputs the site results
@@ -80,8 +90,6 @@ class Main():
                 for Order in Main.SecurityHeadersOrder:
                     for Header in Main.BooleanHeaders[Sites][Order]:
                         SpreadsheetLines.append(Header)
-                print(SpreadsheetLines)
-
                 #Writes site values
                 Writer.writerow(SpreadsheetLines)
 
