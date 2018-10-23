@@ -1,5 +1,12 @@
 # MiniatureSecurityToolkit
 
+**SecHed**:  *Usage: [-h], [-t]*
+
+Identifies missing security headers from a list of URL's and outputs a table to a CSV file.
+Note:
+  - CSV delimiter is ","
+
+
 **BasicAuthCredGen.py**:  *Usage: [-h], [-u], [-uf], [-p], [-pf], [-o], [-s]*
 
 
