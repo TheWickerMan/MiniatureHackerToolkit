@@ -108,6 +108,7 @@ class Main():
                         SpreadsheetLines.append(Header)
                 #Writes site values
                 Writer.writerow(SpreadsheetLines)
+        print("\nOutput written to: \'{}\'.\n".format(Main.BasicInformation["OutputFile"]))
 
     def Run():
         Main.ReadConfig()
