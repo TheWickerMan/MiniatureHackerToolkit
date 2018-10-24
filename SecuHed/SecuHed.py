@@ -38,9 +38,6 @@ class Main():
     def SiteRequest(Site):
         return requests.get(Site)
 
-#    def FollowRedirect(Site):
-
-
     def SiteConnect(Site):
             #Makes sure that the URL in the file matches the regex
             if re.match("^((http:\/\/)|(https:\/\/)(www\.)?)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site) == False:
