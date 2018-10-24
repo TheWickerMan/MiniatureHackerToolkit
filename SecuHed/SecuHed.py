@@ -19,6 +19,8 @@ if not args.t or args.t == "":
 
 class Main():
     BasicInformation = {"Config File":"HeaderConfig.json", "Target File":str(args.t), "OutputFile":"{}Output.csv".format(str(args.t))}
+    #Codes returned in the event of page redirect
+    RedirectCodes = [301, 302, 303, 307, 308]
     ResultCharacters= {True:"✔", False:"X"}
     Domains = []
     #Reads the security header config from the json file
@@ -33,6 +35,12 @@ class Main():
     def ReadDomains():
         Main.Domains = open(Main.BasicInformation["Target File"], "r").read().splitlines()
 
+    def SiteRequest(Site):
+        return requests.get(Site)
+
+#    def FollowRedirect(Site):
+
+
     def SiteConnect(Site):
             #Makes sure that the URL in the file matches the regex
             if re.match("^((http:\/\/)|(https:\/\/)(www\.)?)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site) == False:
@@ -43,13 +51,21 @@ class Main():
                 print("Checking \'{}\' headers.".format(Site))
             #Checks for the sites status code
             try:
-                StatusCode = requests.get(Site).status_code
-                if StatusCode != 200:
-                    print("Site: '{}' returns a HTTP status code of '{}'.  Should probably be something to double check.".format(Site, str(StatusCode)))
-            except Exception:
+                for Counter in range(10):
+                    SiteReq = Main.SiteRequest(Site)
+                    StatusCode = SiteReq.status_code
+                    if StatusCode != 200:
+                        if StatusCode not in Main.RedirectCodes:
+                            print("Site: '{}' returns a HTTP status code of '{}'.  Should probably be something to double check.".format(Site, str(StatusCode)))
+                            break
+                        else:
+                            print("Redirected to {}".format(SiteReq.url))
+                            Site = SiteReq.url
+            except Exception as e:
+                print(e)
                 print("Issue connecting to '{}'.  Make sure that you included the correct URL and that access is available.".format(Site))
                 return "False"
-            return requests.get(Site).headers
+            return Main.SiteRequest(Site).headers
 
     def CheckHeaders():
         for Site in Main.Domains:
@@ -92,6 +108,7 @@ class Main():
                         SpreadsheetLines.append(Header)
                 #Writes site values
                 Writer.writerow(SpreadsheetLines)
+        print("\nOutput written to: \'{}\'.\n".format(Main.BasicInformation["OutputFile"]))
 
     def Run():
         Main.ReadConfig()
