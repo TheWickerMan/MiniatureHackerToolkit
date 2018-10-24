@@ -1,6 +1,6 @@
 # MiniatureSecurityToolkit
 
-**SecHed**:  *Usage: [-h], [-t]*
+**SecuHed**:  *Usage: [-h], [-t]*
 
 Identifies missing security headers from a list of URL's and outputs a table to a CSV file.
 Note:
