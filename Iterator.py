@@ -36,12 +36,12 @@ with open(args.i, "r") as Input:
     for x in Input.read().splitlines():
         Iterations = map(''.join, itertools.product(*((c.upper(), c.lower()) for c in x)))
 
-#Outputs to file
-with open("{}Iterated".format(args.i), "a") as Output:
-    for x in list(Iterations):
-        #Appends a number in the range provided
-        if args.n:
-            for r in range(int(LowerRange), int(UpperRange)+1):
-                Output.write("{}{}\n".format(x, str(r)))
-        else:
-            Output.write("{}\n".format(x))
+        #Outputs to file
+        with open("{}Iterated".format(args.i), "a") as Output:
+            for x in list(Iterations):
+                #Appends a number in the range provided
+                if args.n:
+                    for r in range(int(LowerRange), int(UpperRange)+1):
+                        Output.write("{}{}\n".format(x, str(r)))
+                else:
+                    Output.write("{}\n".format(x))
