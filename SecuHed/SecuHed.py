@@ -18,7 +18,7 @@ if not args.t or args.t == "":
     exit()
 
 class Main():
-    BasicInformation = {"Config File":"HeaderConfig.json", "Target File":str(args.t), "OutputFile":"{}Output.csv".format(str(args.t))}
+    BasicInformation = {"Config File":"./HeaderConfig.json", "Target":str(args.t), "OutputFile":"./{}Output.csv".format(str(args.t).replace("/",""))}
     #Codes returned in the event of page redirect
     RedirectCodes = [301, 302, 303, 307, 308]
     ResultCharacters= {True:"✔", False:"X"}
@@ -32,17 +32,26 @@ class Main():
         Main.SecurityHeaders = json.loads(open(Main.BasicInformation["Config File"], "r").read())
         Main.SecurityHeadersOrder = list(Main.SecurityHeaders)
 
-    def ReadDomains():
-        Main.Domains = open(Main.BasicInformation["Target File"], "r").read().splitlines()
-
     def SiteRequest(Site):
         return requests.get(Site)
 
+    def SiteMatch(Site):
+        if re.match("^((http:\/\/)|(https:\/\/))(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site):
+            return True
+        return False
+
+    def ReadDomains():
+        #Checks whether the target is a URL else assumes it's a file provided
+        if Main.SiteMatch(Main.BasicInformation["Target"]):
+            Main.Domains = [Main.BasicInformation["Target"]]
+        else:
+            Main.Domains = open(Main.BasicInformation["Target"], "r").read().splitlines()
+
     def SiteConnect(Site):
             #Makes sure that the URL in the file matches the regex
-            if re.match("^((http:\/\/)|(https:\/\/)(www\.)?)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site) == False:
-                print("Site does not match regex.  Please ensure either \'http://\' or \'https://\' is provided.")
-                Domains.remove(Site)
+            CheckTheSite = Main.SiteMatch(Site)
+            if CheckTheSite == False:
+                print("{} - Site does not match regex.  Please ensure either \'http://\' or \'https://\' is provided.".format(Site))
                 return "False"
             else:
                 print("Checking \'{}\' headers.".format(Site))
