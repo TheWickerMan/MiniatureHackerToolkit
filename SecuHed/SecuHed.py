@@ -9,7 +9,7 @@ import csv
 parser = argparse.ArgumentParser(description="----------Program-Help-Page----------", formatter_class=RawTextHelpFormatter)
 
 #Inline Arguments
-parser.add_argument("-t", help="Provide a list of domains to check. \n")
+parser.add_argument("-t", help="Provide an individual or list-file of domains to check. \n")
 #Allocates the method to call the arguments to 'args'
 args = parser.parse_args()
 
