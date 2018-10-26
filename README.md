@@ -11,11 +11,17 @@ Identifies missing security headers from a list of URL's and outputs a table to 
 Note:
   - CSV delimiter is ","
 
+```python3 SecuHed.py -t http://testsite.com```
+
+
+```python3 SecuHed.py -t ListOfSites.txt```
+
 
 **BasicAuthCredGen.py**:  *Usage: [-h], [-u], [-uf], [-p], [-pf], [-o], [-s]*
 
 
 Generates a list of Basic Auth credentials from a list of usernames and passwords for convenient brute-forcing.
+
 
 **E-Manipulator.py**:  *Usage: [-h], [-i], [-o], [-Generate], [-Filter], [-s]*
 
