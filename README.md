@@ -1,5 +1,10 @@
 # MiniatureSecurityToolkit
 
+ALL TOOLS ARE WRITTEN IN PYTHON 3 UNLESS OTHERWISE SPECIFIED
+
+
+
+
 **SecuHed**:  *Usage: [-h], [-t]*
 
 Identifies missing security headers from a list of URL's and outputs a table to a CSV file.
