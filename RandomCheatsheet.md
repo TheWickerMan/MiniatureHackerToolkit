@@ -14,7 +14,7 @@ Enter:
 GET / HTTP/1.1
 Host: TARGET-URL-HERE
 Accept-Encoding: compress, gzip
- 
+
 ```
 
 If the response is encoded, that's potentially evidence that it is present.
@@ -22,7 +22,7 @@ If the response is encoded, that's potentially evidence that it is present.
 
 # JQuery
 
-To quickly display the version of JQuery in use - enter this into the browser inspect-elements console.
+To quickly display the version of JQuery in use - enter this into the browser inspect-elements console [FIREFOX].
 
 
 
@@ -35,3 +35,20 @@ Alternatively, you can use:
 
 
 ```alert(jQuery.fn.jquery);```
+
+
+# AngularJS
+
+To quickly display the version of JQuery in use - enter this into the browser inspect-elements console [FIREFOX].
+
+
+
+```angular.version.full```
+
+
+
+Alternatively, you can use:
+
+
+
+```alert(angular.version.full)```
