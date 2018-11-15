@@ -4,6 +4,7 @@ from argparse import RawTextHelpFormatter
 import json
 import re
 import csv
+import os
 
 #Header on the help page
 parser = argparse.ArgumentParser(description="----------Program-Help-Page----------", formatter_class=RawTextHelpFormatter)
@@ -18,7 +19,7 @@ if not args.t or args.t == "":
     exit()
 
 class Main():
-    BasicInformation = {"Config File":"./HeaderConfig.json", "Target":str(args.t), "OutputFile":"./{}Output.csv".format(str(args.t).replace("/",""))}
+    BasicInformation = {"Config File": os.path.join(os.path.dirname(__file__), "./HeaderConfig.json"), "Target":str(args.t), "OutputFile": "{}/{}Output.csv".format(os.path.dirname(__file__), str(args.t).replace("/",""))}
     #Codes returned in the event of page redirect
     RedirectCodes = [301, 302, 303, 307, 308]
     ResultCharacters= {True:"✔", False:"X"}
