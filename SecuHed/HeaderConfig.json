@@ -7,5 +7,5 @@
   "Cacheable HTTPS Response (Control)": {"Cache-Control": "(no-store)|(private, max-age=0)"},
   "Cacheable HTTPS Response (Pragma)":{"Pragma": "(no-cache)"},
   "Referrer Policy": {"Referrer-Policy": "(strict-origin-when-cross-origin)"},
-	"Feature Policy": {"Feature-Policy": "geolocation 'none'; midi 'none'; notifications 'none'; push 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; vibrate 'none'; fullscreen 'none'; payment 'none;"}
+	"Feature Policy": {"Feature-Policy": "(?=.*geolocation 'none')(?=.*midi 'none')(?=.*notifications 'none')(?=.*push 'none')(?=.*sync-xhr 'none';)(?=.*microphone 'none')(?=.*camera 'none')(?=.*magnetometer 'none')(?=.*gyroscope 'none')(?=.*speaker 'none')(?=.*vibrate 'none')(?=.*fullscreen 'none')(?=.*payment 'none')^.*$"}
 }
