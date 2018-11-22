@@ -40,6 +40,8 @@ class Main():
     def SiteMatch(Site):
         if re.match("^((http:\/\/)|(https:\/\/))(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site):
             return True
+        if re.match("((http:\/\/)|(https:\/\/))([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})", Site):
+            return True
         return False
 
     def ReadDomains():
