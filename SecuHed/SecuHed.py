@@ -19,7 +19,7 @@ if not args.t or args.t == "":
     exit()
 
 class Main():
-    BasicInformation = {"Config File": os.path.join(os.path.dirname(__file__), "./HeaderConfig.json"), "Target":str(args.t), "OutputFile": "{}{}Output.csv".format(os.path.dirname(__file__), str(args.t).replace("/",""))}
+    BasicInformation = {"Config File": os.path.join(os.path.dirname(__file__), "./HeaderConfig.json"), "Target":str(args.t), "OutputFile": "{}/{}Output.csv".format(os.path.dirname(__file__), str(args.t).replace("/",""))}
     #Codes returned in the event of page redirect
     RedirectCodes = [301, 302, 303, 307, 308]
     ResultCharacters= {True:"✔", False:"X"}
@@ -90,6 +90,7 @@ class Main():
                             #Checks the header values against approved ones
                             if re.search(Main.SecurityHeaders[HeaderTitle][Header], WebRequest[Header]):
                                 Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[True]
+
 
     def WriteOutput():
         with open(Main.BasicInformation["OutputFile"], "a") as CSVOutput:
