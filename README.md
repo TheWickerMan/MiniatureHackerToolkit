@@ -44,3 +44,4 @@ Iteratively generates a list up upper/lower string combinations from a provided 
 
 Contains various concepts for web-based attacks.
  - CORS.html - Tests for misconfigured Cross-Origin Resource Sharing functionality.
+ - HTMLUpload.html - Basic html upload poc.
