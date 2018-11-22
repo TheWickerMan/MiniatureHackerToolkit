@@ -5,6 +5,7 @@ import json
 import re
 import csv
 import os
+from termcolor import colored
 
 #Header on the help page
 parser = argparse.ArgumentParser(description="----------Program-Help-Page----------", formatter_class=RawTextHelpFormatter)
@@ -91,6 +92,17 @@ class Main():
                             if re.search(Main.SecurityHeaders[HeaderTitle][Header], WebRequest[Header]):
                                 Main.BooleanHeaders[Site][HeaderTitle] = Main.ResultCharacters[True]
 
+    def PrintOutput():
+        print("")
+        for Site in Main.BooleanHeaders:
+            print(Site)
+            for Header in Main.BooleanHeaders[Site].keys():
+                if Main.BooleanHeaders[Site][Header] == Main.ResultCharacters[True]:
+                    print("     {} - {}".format(Header, colored(Main.BooleanHeaders[Site][Header], "green")))
+                else:
+                    print("     {} - {}".format(Header, colored(Main.BooleanHeaders[Site][Header], "red")))
+            print("")
+
 
     def WriteOutput():
         with open(Main.BasicInformation["OutputFile"], "a") as CSVOutput:
@@ -122,6 +134,7 @@ class Main():
         Main.ReadConfig()
         Main.ReadDomains()
         Main.CheckHeaders()
+        Main.PrintOutput()
         Main.WriteOutput()
 
 Main.Run()
