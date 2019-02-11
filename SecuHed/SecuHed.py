@@ -7,6 +7,10 @@ import csv
 import os
 from termcolor import colored
 
+#Prevents error messages against targets with weak/insecure certificates
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 #Header on the help page
 parser = argparse.ArgumentParser(description="----------Program-Help-Page----------", formatter_class=RawTextHelpFormatter)
 
@@ -35,7 +39,7 @@ class Main():
         Main.SecurityHeadersOrder = list(Main.SecurityHeaders)
 
     def SiteRequest(Site):
-        return requests.get(Site)
+        return requests.get(Site, verify=False)
 
     def SiteMatch(Site):
         if re.match("^((http:\/\/)|(https:\/\/))(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", Site):
