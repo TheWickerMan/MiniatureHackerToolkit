@@ -1,11 +1,11 @@
 {
-	"HTTP Strict Transport Security": {"Strict-Transport-Security": "(max\\-age=)[0-9]*(;IncludeSubDomains)"},
-	"Content Security Policy": {"Content-Security-Policy": "(default-src 'self')"},
+	"HTTP Strict Transport Security": {"Strict-Transport-Security": "(?i)(max\\-age=)([0-9]{8,})(\\;)( )?includeSubdomains\\;( preload)?"},
+	"Content Security Policy": {"Content-Security-Policy": "(?i)(default-src 'self')"},
 	"Cross-Site Scripting Protection": {"X-XSS-Protection": "(1; mode=block)"},
-	"Clickjacking": {"X-Frame-Options": "(Deny)|(SAMEORIGIN)"},
-  "Content Sniffing": {"X-Content-Type-Options": "(nosniff)"},
-  "Cacheable HTTPS Response (Control)": {"Cache-Control": "(no-store)|(private, max-age=0)"},
-  "Cacheable HTTPS Response (Pragma)":{"Pragma": "(no-cache)"},
-  "Referrer Policy": {"Referrer-Policy": "(strict-origin-when-cross-origin)"},
-	"Feature Policy": {"Feature-Policy": "(?=.*geolocation 'none')(?=.*midi 'none')(?=.*notifications 'none')(?=.*push 'none')(?=.*sync-xhr 'none';)(?=.*microphone 'none')(?=.*camera 'none')(?=.*magnetometer 'none')(?=.*gyroscope 'none')(?=.*speaker 'none')(?=.*vibrate 'none')(?=.*fullscreen 'none')(?=.*payment 'none')^.*$"}
+	"Clickjacking": {"X-Frame-Options": "(?i)(Deny)|(SAMEORIGIN)"},
+  "Content Sniffing": {"X-Content-Type-Options": "(?i)(nosniff)"},
+  "Cacheable HTTPS Response (Control)": {"Cache-Control": "(?i)(no-store)|(private, max-age=0)"},
+  "Cacheable HTTPS Response (Pragma)":{"Pragma": "(?i)(no-cache)"},
+  "Referrer Policy": {"Referrer-Policy": "(?i)(strict-origin-when-cross-origin)"},
+	"Feature Policy": {"Feature-Policy": "(?i)(?=.*geolocation 'none')(?=.*midi 'none')(?=.*notifications 'none')(?=.*push 'none')(?=.*sync-xhr 'none';)(?=.*microphone 'none')(?=.*camera 'none')(?=.*magnetometer 'none')(?=.*gyroscope 'none')(?=.*speaker 'none')(?=.*vibrate 'none')(?=.*fullscreen 'none')(?=.*payment 'none')^.*$"}
 }
