@@ -4,19 +4,13 @@ To quickly display the version of the library in use - enter the following into 
 
 ```
 async function DependencyChecker(){;
-var JSDependencies=[];
-try{JSDependencies.push("JQuery Version: "+jQuery().jquery)};
-catch(e){};
-try{JSDependencies.push("JQuery-UI Version:"+jQuery.ui.version)};
-catch(e){};
-try{JSDependencies.push("Knockout Version: "+ko.version)};
-catch(e){};
-try{JSDependencies.push("Bootstrap Version: "+$.fn.tooltip.Constructor.VERSION)};
-catch(e){};
-try{JSDependencies.push("Angular Version: "+angular.version.full)};
-catch(e){};
-try{JSDependencies.push("Vue Version: "+Vue.version)};
-catch(e){};
+var JSDependencies=[]
+try{JSDependencies.push("JQuery Version: "+jQuery().jquery)}catch(e){};
+try{JSDependencies.push("JQuery-UI Version:"+jQuery.ui.version)}catch(e){};
+try{JSDependencies.push("Knockout Version: "+ko.version)}catch(e){};
+try{JSDependencies.push("Bootstrap Version: "+$.fn.tooltip.Constructor.VERSION)}catch(e){};
+try{JSDependencies.push("Angular Version: "+angular.version.full)}catch(e){};
+try{JSDependencies.push("Vue Version: "+Vue.version)}catch(e){};
 if(JSDependencies.length>0){alert(JSDependencies.join("\n"))};
 };
 DependencyChecker();
