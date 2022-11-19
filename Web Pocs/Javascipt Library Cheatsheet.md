@@ -1,6 +1,6 @@
 To quickly display the version of the library in use - enter the following into the browser console:
 
-# Check all of the below libraries
+# Polyglot
 
 ```
 async function DependencyChecker(){;
