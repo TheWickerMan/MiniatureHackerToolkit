@@ -17,6 +17,7 @@ try{JSDependencies.push("D3 Version: "+d3.version)}catch(e){NotDetected.push("D3
 try{JSDependencies.push("Ember Version: "+Ember.VERSION)}catch(e){NotDetected.push("Ember")}
 try{JSDependencies.push("Backbone Version: "+Backbone.VERSION)}catch(e){NotDetected.push("Backbone")}
 try{JSDependencies.push("GSAP Version: "+gsap.version)}catch(e){NotDetected.push("GSAP")}
+try{JSDependencies.push("DataTable Version: "+$.fn.DataTable.version)}catch(e){NotDetected.push("DataTable")}
 if(JSDependencies.length==0){JSDependencies.push("No JavaScript Libraries Detected.")}
 alert("JavaScript Libraries:\n"+JSDependencies.join("\n")+"\n\nLibraries Not Detected:\n"+NotDetected.join(", ")+".")
 }
@@ -87,3 +88,8 @@ DependencyChecker()
 
 
 ```gsap.version``` or ```alert("GSAP Version: "+gsap.version)```
+
+
+# DataTable
+
+```$.fn.DataTable.version``` or ```alert("DataTable Version: "+$.fn.DataTable.version)```
