@@ -19,6 +19,7 @@ try{JSDependencies.push("Backbone Version: "+Backbone.VERSION)}catch(e){NotDetec
 try{JSDependencies.push("GSAP Version: "+gsap.version)}catch(e){NotDetected.push("GSAP")}
 try{JSDependencies.push("DataTable Version: "+$.fn.DataTable.version)}catch(e){NotDetected.push("DataTable")}
 try{JSDependencies.push("Moment.js Version: "+moment.version)}catch(e){NotDetected.push("Moment.js")}
+try{JSDependencies.push("DOMPurify Version: "+DOMPurify.version)}catch(e){NotDetected.push("DOMPurify")}
 if(JSDependencies.length==0){JSDependencies.push("No JavaScript Libraries Detected.")}
 alert("JavaScript Libraries:\n"+JSDependencies.join("\n")+"\n\nLibraries Not Detected:\n"+NotDetected.join(", ")+".")
 }
@@ -94,3 +95,8 @@ DependencyChecker()
 # DataTable
 
 ```$.fn.DataTable.version``` or ```alert("DataTable Version: "+$.fn.DataTable.version)```
+
+
+# DOMPurify
+
+```DOMPurify.version``` or ```alert("DOMPurify Version: "+DOMPurify.version)```
