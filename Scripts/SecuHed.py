@@ -83,6 +83,7 @@ class Main():
 
     def CheckHeaders():
         for Site in Main.Domains:
+            Site = Site.strip()
             WebRequest = (Main.SiteConnect(Site))
             if WebRequest == "False":
                 pass
